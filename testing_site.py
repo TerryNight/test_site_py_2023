@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
-from selenium.webdriver import FirefoxOptions
+from selenium.webdriver.firefox.options import Options
 
 # Переменные
 URL = 'https://www.saucedemo.com/'
@@ -10,9 +10,9 @@ LOGIN = 'standard_user'
 PASSWORD = 'secret_sauce'
 
 def get_driver ():
-    opts = FirefoxOptions()
-    opts.add_argument("--headless")
-    browser = webdriver.Firefox(options=opts)
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
     driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     return driver
 
