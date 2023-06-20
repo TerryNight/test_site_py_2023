@@ -1,20 +1,21 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--window-size=1920,800")
+chrome_options.add_argument("--headless")
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 
 # Переменные
 URL = 'https://www.saucedemo.com/'
 LOGIN = 'standard_user'
 PASSWORD = 'secret_sauce'
 
-def get_driver ():
-    options = Options()
-    options.headless = True
-    driver = webdriver.Firefox(options=options)
-    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-    return driver
 
 def openURL (driver, URL):
     driver.get(URL)
@@ -35,8 +36,6 @@ def authorisation (driver, login, password):
     el_send_keys (driver, 'password', PASSWORD)
     el_click (driver, 'login-button')
 
-# 0. Получение драйвера
-driver = get_driver()
 
 # 1. Запуск страницы
 openURL (driver, URL)

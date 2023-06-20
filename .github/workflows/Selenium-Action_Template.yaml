@@ -13,8 +13,8 @@ jobs:
           python-version: '3.9'
       - name: Installing package list
         run: apt list --installed
-      - name: Removing previous firefox instances on runner
-        run: sudo apt-get install -y firefox
+      - name: Removing previous chrome instances on runner
+        run: sudo apt-get install -y chromium-browser
 
        # Need to fetch reqs if needed
       - name: Installing all necessary packages
@@ -23,4 +23,4 @@ jobs:
         run: sudo apt-get install xvfb
 
       - name: Running the Python script
-        run: python testing_site.py
+        run: python test_site.py
